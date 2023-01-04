@@ -9,21 +9,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class JFall2022Test {
+public class QuirksTest {
 
     @Test
     public void null_reference() {
-        JFall2022 jFall = new JFall2022();
-        JFall2022 nothing = null;
+        Quirks jFall = new Quirks();
+        Quirks nothing = null;
 
         assertDoesNotThrow(() -> jFall.give_me_five());
         assertThrows(NullPointerException.class, () -> nothing.callme());
-        assertThrows(NullPointerException.class, () -> nothing.give_me_five());
+        assertDoesNotThrow(() -> nothing.give_me_five());
     }
 
     @Test
@@ -31,8 +30,8 @@ public class JFall2022Test {
         double zero = 0.0;
         double negative = -1.0;
         assertFalse(zero < Integer.MIN_VALUE);
-        assertFalse(zero < Double.MIN_VALUE);
-        assertFalse(negative < Double.MIN_VALUE);
+        assertFalse(zero < Double.NEGATIVE_INFINITY);
+        assertFalse(negative < Double.NEGATIVE_INFINITY);
     }
 
     @Test
@@ -51,11 +50,11 @@ public class JFall2022Test {
 
     @Test
     public void non_final_string() {
-        JFall2022.replaceWith("JFall", "JavaOne");
-        System.out.println("We are attending: ");
-        System.out.print("JFall");
+        Quirks.replaceWith("JFall", "JavaOne");
 
         System.out.println("We are attending: " + "JFall");
+
+        System.out.println("JFall");
 
         assertEquals("JFall", "JavaOne");
     }
@@ -81,12 +80,12 @@ public class JFall2022Test {
     public void number_literal_with_leading_0() {
         assertEquals(Integer.valueOf(0123).intValue(), 0123);
         assertEquals(Integer.valueOf(0123).intValue(), 83);
-        assertEquals(Integer.valueOf("0123").intValue(), 0123);
+        assertEquals(Integer.valueOf("0123").intValue(), 83);
     }
 
     @Test
     public void wrapper_class_equality() {
-        for(int i = -10; i < 200; i++) {
+        for(int i = -10; i < 127; i++) {
             Integer a = i, b = i;
             assertSame(a, b);
         }
@@ -94,13 +93,11 @@ public class JFall2022Test {
 
     @Test
     public void receiving_parameter() {
-        JFall2022.Receiver r = new JFall2022.Receiver();
-        assertEquals(5, r.method(r, 5));
+        Quirks.Receiver r = new Quirks.Receiver();
+        assertEquals(5, r.method(5));
     }
 
     @Test
-    // add break during talk
-    // make more obvious by not using numbers?
     public void url_syntax() {
 
         int i = 2;
@@ -109,7 +106,7 @@ public class JFall2022Test {
         https://www.jfall.nl
         {
             if(i < 5) {
-                max = 5;
+                max = 5; break https;
             }
             if(i < 10) {
                 max = 10;
@@ -121,7 +118,7 @@ public class JFall2022Test {
 
     @Test
     public void c_style_array_declaration_of_method() {
-        int a[] = JFall2022.parameter();
+        int a[] = Quirks.parameter();
         int[] b = a;
 
         assertEquals(a, b);
@@ -130,23 +127,23 @@ public class JFall2022Test {
     @Test
     public void mutable_enum() {
 
-        assertEquals("1", JFall2022.MyMutableEnum.ONE + "");
-        assertEquals("2", JFall2022.MyMutableEnum.TWO + "");
+        assertEquals("1", Quirks.MyMutableEnum.ONE + "");
+        assertEquals("2", Quirks.MyMutableEnum.TWO + "");
 
-        JFall2022.MyMutableEnum.THREE.createAMess();
+        Quirks.MyMutableEnum.THREE.createAMess();
 
-        assertEquals("1", JFall2022.MyMutableEnum.ONE + "");
-        assertEquals("2", JFall2022.MyMutableEnum.TWO + "");
+        assertEquals("11", Quirks.MyMutableEnum.ONE + "");
+        assertEquals("22", Quirks.MyMutableEnum.TWO + "");
     }
 
     @Test
     public void var_with_generics() {
 
-        List<String> obj1 = new ArrayList<>();
+        var obj1 = new ArrayList<>();
         obj1 = new ArrayList<>();
 
-        List<String> obj2 = new ArrayList<>();
-        obj2 = new LinkedList<>();
+//        var obj2 = new ArrayList<>();
+//        obj2 = new LinkedList<>();
     }
 
     @Test

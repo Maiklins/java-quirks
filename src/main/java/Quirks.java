@@ -1,6 +1,6 @@
 import java.lang.reflect.Field;
 
-public class JFall2022 {
+public class Quirks {
 
     public static int parameter() [] {
         int[] numbers = new int[] {1, 2, 3};
@@ -38,7 +38,7 @@ public class JFall2022 {
     }
 
     static class Receiver {
-        public int method(Receiver r, int number) {
+        public int method(Receiver this, int number) {
             return number;
         }
     }

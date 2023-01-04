@@ -1,5 +1,5 @@
-# Java Quirks talk at JFall 2022
-https://jfall.nl/timetable-2022/
+# Talks
+- JFall 2022 https://jfall.nl/timetable-2022/
 
 ## Motivation
 The idea of the talk is to present unexpected and lesser know features of the Java programming
@@ -18,7 +18,6 @@ Here's a selection of resources
 - https://medium.com/javarevisited/3-lambda-quirks-every-java-developer-should-know-e704497f80ee
 - https://blog.devgenius.io/experienced-developers-know-these-7-weird-java-quirks-db5dcb3076bd
 - https://www.innoq.com/de/articles/2020/09/java-wat/
-- sun.misc.unsafe, DirectByteBuffers
 - https://www.programming-hero.com/blog/10-java-hacks-that-most-junior-developers-dont-know.html
 
 ## Remarks
